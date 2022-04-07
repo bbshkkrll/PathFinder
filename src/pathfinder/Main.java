@@ -8,7 +8,9 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
+
         File input = new File("input.txt");
+
         try {
             Scanner scanner = new Scanner(input);
 
@@ -21,7 +23,6 @@ public class Main {
             }
 
             var labyrinth = new Labyrinth(lines, linesCount, rowsCount);
-
 
             var startNode = new Node(scanner.nextLine());
             var endNode = new Node(scanner.nextLine());
@@ -42,7 +43,7 @@ public class Main {
             for (var i = 0; i < result.length - 1; i++) {
                 fileWriter.append(result[i].toString());
             }
-            fileWriter.append(result[result.length - 1].toString().replace('\n', ' '));
+            fileWriter.append(result[result.length - 1].toString().replace("\n", ""));
         } else {
             fileWriter.append("N");
         }

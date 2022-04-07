@@ -22,12 +22,12 @@ public class Labyrinth {
                 }
             }
         }
-     }
+    }
 
     public Node[] findPath(Node start, Node end) {
         if (labyrinth[start.X][start.Y] == State.WALL
                 || labyrinth[end.X][end.Y] == State.WALL)
-            return new Node[0];
+            return Path.emptyPath;
 
 
         var path = new Path(start);
@@ -41,7 +41,7 @@ public class Labyrinth {
             var currentPath = stack.pop();
             var currentNode = currentPath.current;
 
-            if (isNodeInvalid(currentNode))
+            if (!isNodeValid(currentNode) || labyrinth[currentNode.X][currentNode.Y] != State.EMPTY)
                 continue;
 
             labyrinth[currentNode.X][currentNode.Y] = State.VISITED;
@@ -73,10 +73,10 @@ public class Labyrinth {
         };
     }
 
-    public Boolean isNodeInvalid(Node node) {
-        return node.X < 0 || node.Y < 0
-                || node.X > rowsCount ||
-                node.Y > linesCount || labyrinth[node.X][node.Y] != State.EMPTY;
+    public Boolean isNodeValid(Node node) {
+        return node.X >= 0 && node.Y >= 0
+                && node.X <= linesCount - 1 &&
+                node.Y <= rowsCount - 1;
     }
 
 
